@@ -28,3 +28,54 @@ media=MessageMediaPhoto(photo=Photo(
 	grouped_id=13256956813020146, 
 	restriction_reason=[], 
 	ttl_period=None)
+
+
+
+
+
+Message(
+	id=2730, 
+	peer_id=PeerChannel(channel_id=1380785663), 
+	date=datetime.datetime(2022, 7, 6, 15, 0, 1, tzinfo=datetime.timezone.utc), 
+	message='', 
+	out=False, 
+	mentioned=False, 
+	media_unread=False, 
+	silent=False, 
+	post=True, 
+	from_scheduled=False, 
+	legacy=False, 
+	edit_hide=False, 
+	pinned=False, 
+	from_id=None, 
+	fwd_from=None, 
+	via_bot_id=None, 
+	reply_to=None, 
+	media=MessageMediaPhoto(photo=Photo(
+		id=5325609806540685609, 
+		access_hash=765169102052310714, 
+		file_reference=b"\x02RM\x1d\xff\x00\x00\n\xaab\xc5\xa3q\xab\xfa\xbd\xbf\xf5Y\x9c\xb3rK'\xba\xa1\x8d\x1b\xb7", 
+		date=datetime.datetime(2022, 6, 29, 15, 2, 26, tzinfo=datetime.timezone.utc), 
+		sizes=[PhotoStrippedSize(type='i', bytes=b"\x01( q\x8czS\x0c~\x95g\x19\xebK\xb0WG1\x83\x8d\xca\xbe_J_.\xac\x14\x19\x14\xbb(\xe6\x17!\\\xdfE\xe8O\xe1M\xfe\xd0N\xc8O\xd4\xd6wzV\x18\xaenft\xd9\x17N\xa2x\xfd\xdfOzO\xed#\x91\xf2\x0c}j\x88\xce>\xb4\x87\xd2\x8b\xb1Xp\x07\x93\x8e\x94\x83'\x80h\xa2\x91@\x8f\xb0\xe7\x8c{\xd2\xb3\x06l\x8e\xf4Q@\xae\x7f"), PhotoSize(type='m', w=257, h=320, size=20125), PhotoSize(type='x', w=643, h=800, size=106430), PhotoSizeProgressive(type='y', w=1029, h=1280, sizes=[15379, 37785, 53238, 88580, 173518])], 
+	dc_id=2, 
+	has_stickers=False, 
+	video_sizes=[]), ttl_seconds=None), 
+	reply_markup=None, 
+	entities=[], 
+	views=1, 
+	forwards=0, 
+	replies=None, 
+	edit_date=None, 
+	post_author=None, 
+	grouped_id=13256956813020146, 
+	restriction_reason=[], 
+	ttl_period=None)
+
+
+
+
+
+
+
+
+

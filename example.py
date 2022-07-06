@@ -6,11 +6,10 @@ api_hash = dIdHash.readline().splitlines()[0]
 session_name = dIdHash.readline().splitlines()[0]
 dIdHash.close()
 
-print("api_id=", api_id, "api_hash=",api_hash, "session_name=", session_name, sep='', end='')
+#Отлаживаем вход в телеграмм
+#print("api_id=", api_id, "api_hash=",api_hash, "session_name=", session_name, sep='')
 # 'session_id' can be 'your_name'. It'll be saved as your_name.session
 client = TelegramClient(session_name, api_id, api_hash)
-
-
 
 client.connect()
 if not client.is_user_authorized():
@@ -31,10 +30,19 @@ async def normal_handler(event):
 #        if tag in str(event.message):
 
 	await client.send_message(OUTPUT_CHANNEL, event.message)
-	print(event.message.message, "\n-----------------\n")
+
+	#Получаем только текст из сообщения
+	print(event.message.message, "\n-----------------")
+
+	await client.download_media(event.message.media)
+
+	#photo_1 = Image.open(event.message.photo)
+	#image_buf = BytesIO()
+	#photo_1.save(image_buf, format="JPEG")
+	#image = image_buf.getvalue()
 	
 	dMsgOut= open('dMsgOut.txt', 'a')
-	#dMsgOut.write(event.message)
+	dMsgOut.write(str(event.message) + "\n")
 	dMsgOut.close() 	
 
 client.start()
