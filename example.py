@@ -19,7 +19,7 @@ if not client.is_user_authorized():
 
 # ###################################
 # Now you can use the connected client as you wish
-INPUT_CHANNEL = 'pr2ch'
+INPUT_CHANNEL = 'PrInput'
 OUTPUT_CHANNEL = 'PrOutput'
 #TAGS = ['#TAG1', '#TAG2']
 
@@ -30,7 +30,12 @@ async def normal_handler(event):
 
 #        if tag in str(event.message):
 
-            await client.send_message(OUTPUT_CHANNEL, event.message)
+	await client.send_message(OUTPUT_CHANNEL, event.message)
+	print(event.message.message, "\n-----------------\n")
+	
+	dMsgOut= open('dMsgOut.txt', 'a')
+	#dMsgOut.write(event.message)
+	dMsgOut.close() 	
 
 client.start()
 client.run_until_disconnected()
