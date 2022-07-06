@@ -1,5 +1,12 @@
 from telethon.sync import TelegramClient, events
 
+dIdHash= open('IdHash.txt', 'r')
+api_id = dIdHash.readline().splitlines()[0]
+api_hash = dIdHash.readline().splitlines()[0]
+session_name = dIdHash.readline().splitlines()[0]
+dIdHash.close()
+
+print("api_id=", api_id, "api_hash=",api_hash, "session_name=", session_name, sep='', end='')
 # 'session_id' can be 'your_name'. It'll be saved as your_name.session
 client = TelegramClient(session_name, api_id, api_hash)
 
@@ -12,7 +19,7 @@ if not client.is_user_authorized():
 
 # ###################################
 # Now you can use the connected client as you wish
-INPUT_CHANNEL = 'viewrussia'
+INPUT_CHANNEL = 'pr2ch'
 OUTPUT_CHANNEL = 'PrOutput'
 #TAGS = ['#TAG1', '#TAG2']
 
