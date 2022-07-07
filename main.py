@@ -169,7 +169,7 @@ async def normal_handler(event):
 			else:
 				List.append('NoPhoto') #У поста нет медиаконтента
 
-		await client.download_media(event.message.media)
+		await client.download_media(event.message.media, "Photos/"+str(List[5])+"/")
 
 		#photo_1 = Image.open(event.message.photo)
 		#image_buf = BytesIO()
@@ -187,6 +187,7 @@ async def normal_handler(event):
 	else: #Сюда входят случаи, когда сообщение рекламное либо когда оно состоит из прикрепленного изображения.
 		print('The message does not match the info message criteria')
 		
+		PathStr='NoPath'
 		if str(event.message.grouped_id) != 'None': #Если картинка всего одна, то значение None. нужно как-то подругому идентифицировать картинки к постам.
 			PathStr=str(event.message.grouped_id)
 		else:
