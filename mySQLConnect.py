@@ -46,10 +46,6 @@ def PutInmySQL(List):
 					with connection.cursor() as cursor:
 						cursor.execute(use_db_query)
 
-
-
-
-
 					create_Places_table_query = """
 					CREATE TABLE Places(
 						id INT AUTO_INCREMENT PRIMARY KEY,
@@ -66,13 +62,29 @@ def PutInmySQL(List):
 						print("TouristPlaces db has been created")
 				else:
 					print("TouristPlaces db exists.")
-
+					use_db_query = "USE TouristPlaces"
+					with connection.cursor() as cursor:
+						cursor.execute(use_db_query)
+				
+				#Добавляем запись в базу данных
+				print("Inserting a new entry...: ", List[:5]) #Выводим все кроме фото
+				insert_place_query = """
+				INSERT INTO Places (name, tag, description, latitude, longitude)
+				VALUES
+					(%s, %s, %s, %s, %s)
+				"""
+				with connection.cursor() as cursor:
+					for result in cursor.execute(insert_place_query, List, multi=True):
+						if result.with_rows:
+							print(result.fetchall())
+					connection.commit()
+				print("Entry has been inserted") #Выводим все кроме фото
 
 	#ловим необработанные исключения при работе с соединением
 	except Error as e:
 		print(e)
 
-List=[]
+List=['100.10', '200.20', '300.30', '400.40', '500.50']
 
 PutInmySQL(List)
 
