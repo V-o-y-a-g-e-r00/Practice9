@@ -3,16 +3,23 @@
 # Разбивает строку сообщения из поста на список, пригодный к использованию в базе данных
 def SplitStr(Str):
 	import re
+	import copy
+
 	List=[]
-	
+	Result=[0, []]
 	#Название и тэг
 	Str1=re.split('\n\n', Str)[0]	
 	#Название
 	List.append(re.split(', ', Str1)[0])
 	#Тэг
-	if re.split(', ', Str1)[1][0]!='#': #Чтобы игнорировать рекламные посты.
-		return -1
-	List.append(re.split(', ', Str1)[1][1:])
+	if len(re.split(', ', Str1))>=2: #Чтобы избежать переполнения.	
+		if re.split(', ', Str1)[1][0]!='#': #Чтобы игнорировать рекламные посты.
+			Result[0]=-1		
+			return Result
+		List.append(re.split(', ', Str1)[1][1:])
+	else:
+		Result[0]=-1		
+		return Result
 
 	#Описание. Его пока нет, поэтому будет пустая строка
 	List.append('')
@@ -22,8 +29,9 @@ def SplitStr(Str):
 	List.append(re.split(', ', Str2)[0])
 	List.append(re.split(', ', Str2)[1])
 
-#	print(List)	
-	return List
+#	print(List)
+	Result[1]=copy.copy(List)
+	return Result
 
 # Помещает данные из списка в базу данных. Если базы данных не существует, то создает её.
 def PutInmySQL(List):
@@ -77,9 +85,10 @@ def PutInmySQL(List):
 						id INT AUTO_INCREMENT PRIMARY KEY,
 						name VARCHAR(2047),
 						tag VARCHAR(2047),
-						description VARCHAR(10239),
+						description text(10239),
 						latitude DECIMAL(9,6),
-						longitude DECIMAL(9,6)
+						longitude DECIMAL(9,6),
+						grouped_id VARCHAR(2047)
 					)
 					"""
 					with connection.cursor() as cursor:
@@ -93,11 +102,11 @@ def PutInmySQL(List):
 						cursor.execute(use_db_query)
 				
 				#Добавляем запись в базу данных
-				print("Inserting a new entry...: ", List[:5]) #Выводим все кроме фото
+				print("Inserting a new entry...: ", List)
 				insert_place_query = """
-				INSERT INTO Places (name, tag, description, latitude, longitude)
+				INSERT INTO Places (name, tag, description, latitude, longitude, grouped_id)
 				VALUES
-					(%s, %s, %s, %s, %s)
+					(%s, %s, %s, %s, %s, %s)
 				"""
 				with connection.cursor() as cursor:
 					for result in cursor.execute(insert_place_query, List, multi=True):
@@ -149,21 +158,44 @@ async def normal_handler(event):
 
 	#Получаем только текст из сообщения
 	print("New post has been appeared. The message is:\n-----------------\n", event.message.message, "\n-----------------", sep='')
+	if SplitStr(event.message.message)[0]!=-1: #Проверяем, имеет ли сообщение тот текст, который нам необходим.
+		print('The message matches the info message criteria')
+		List=SplitStr(event.message.message)[1] #Разбиваем сообщение на список
+		if str(event.message.grouped_id) != 'None': #Если картинка всего одна, то значение None. нужно как-то подругому идентифицировать картинки к постам.
+			List.append(event.message.grouped_id) #Пост по факту разбит на несколько, в одном - текст, в остальных - картинки. Поэтому для того, чтобы понять, какие картинки с ним связаны, нам нужно это свойство.
+		else:
+			if str(event.message.media)!='None':
+				List.append(event.message.media.photo.id)
+			else:
+				List.append('NoPhoto') #У поста нет медиаконтента
 
-	await client.download_media(event.message.media)
+		await client.download_media(event.message.media)
 
-	#photo_1 = Image.open(event.message.photo)
-	#image_buf = BytesIO()
-	#photo_1.save(image_buf, format="JPEG")
-	#image = image_buf.getvalue()
-	
-	dMsgOut= open('dMsgOut.txt', 'a')
-	dMsgOut.write(str(event.message) + "\n")
-	dMsgOut.close()
+		#photo_1 = Image.open(event.message.photo)
+		#image_buf = BytesIO()
+		#photo_1.save(image_buf, format="JPEG")
+		#image = image_buf.getvalue()
+		
+		#Пишем сообщения для возможности отладки
+		dMsgOut= open('dMsgOut.txt', 'a')
+		dMsgOut.write(str(event.message) + "\n")
+		dMsgOut.close()
 
-	print("Sending text data to TouristPlaces db...")
-	PutInmySQL(SplitStr(event.message.message)) #Передаем функции, отвечающей за добавление в базу данных список, полученный из строки сообщения.
-	print("Text data has been sent")
+		print("Sending text data to TouristPlaces db...")
+		PutInmySQL(List) #Передаем функции, отвечающей за добавление в базу данных список, полученный из строки сообщения.
+		print("Text data has been sent")
+	else: #Сюда входят случаи, когда сообщение рекламное либо когда оно состоит из прикрепленного изображения.
+		print('The message does not match the info message criteria')		
+		await client.download_media(event.message.media)
+		
+		#Пишем сообщения для возможности отладки
+		dMsgOut= open('dMsgOut.txt', 'a')
+		dMsgOut.write(str(event.message) + "\n")
+		dMsgOut.close()
+
+
+
+
 
 
 	print("Waiting for new posts on", INPUT_CHANNEL, "channel...")	
