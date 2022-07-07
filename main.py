@@ -14,6 +14,9 @@ def SplitStr(Str):
 		return -1
 	List.append(re.split(', ', Str1)[1][1:])
 
+	#Описание. Его пока нет, поэтому будет пустая строка
+	List.append('')
+	
 	#Координаты	
 	Str2=re.split('\n\n', Str)[1]
 	List.append(re.split(', ', Str2)[0])
@@ -158,6 +161,11 @@ async def normal_handler(event):
 	dMsgOut.write(str(event.message) + "\n")
 	dMsgOut.close()
 
+	print("Sending text data to TouristPlaces db...")
+	PutInmySQL(SplitStr(event.message.message)) #Передаем функции, отвечающей за добавление в базу данных список, полученный из строки сообщения.
+	print("Text data has been sent")
+
+
 	print("Waiting for new posts on", INPUT_CHANNEL, "channel...")	
 
 client.start()
@@ -165,3 +173,9 @@ client.run_until_disconnected()
 
 entities = client.get_dialogs(1)
 print('\n'.join('{}. {}'.format(i, str(e)) for i, e in enumerate(entities)))
+
+
+
+
+
+
