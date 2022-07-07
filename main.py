@@ -86,8 +86,8 @@ def PutInmySQL(List):
 						name VARCHAR(2047),
 						tag VARCHAR(2047),
 						description text(10239),
-						latitude DECIMAL(9,6),
-						longitude DECIMAL(9,6),
+						latitude DECIMAL(11,8),
+						longitude DECIMAL(11,8),
 						grouped_id VARCHAR(2047)
 					)
 					"""
@@ -185,8 +185,15 @@ async def normal_handler(event):
 		PutInmySQL(List) #Передаем функции, отвечающей за добавление в базу данных список, полученный из строки сообщения.
 		print("Text data has been sent")
 	else: #Сюда входят случаи, когда сообщение рекламное либо когда оно состоит из прикрепленного изображения.
-		print('The message does not match the info message criteria')		
-		await client.download_media(event.message.media)
+		print('The message does not match the info message criteria')
+		
+		if str(event.message.grouped_id) != 'None': #Если картинка всего одна, то значение None. нужно как-то подругому идентифицировать картинки к постам.
+			PathStr=str(event.message.grouped_id)
+		else:
+			if str(event.message.media)!='None':
+				PathStr=str(event.message.media.photo.id)		
+		
+		await client.download_media(event.message.media, "Photos/"+PathStr+"/")
 		
 		#Пишем сообщения для возможности отладки
 		dMsgOut= open('dMsgOut.txt', 'a')
