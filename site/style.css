@@ -1,0 +1,32 @@
+   #C1{opacity:0;}
+   .st1{fill:white;stroke:#000000}
+   
+   #C2{opacity:0;}
+   .st2{fill:white;stroke:#000000}
+
+   #C3{opacity:0;}
+   .st3{fill:white;stroke:#000000}
+
+   #C4{opacity:0;}
+   .st4{fill:white;stroke:#000000}
+
+   #C5{opacity:0;}
+   .st5{fill:white;stroke:#000000}
+
+   #C6{opacity:0;}
+   .st6{fill:white;stroke:#000000}
+
+   #C7{opacity:0;}
+   .st7{fill:white;stroke:#000000}
+
+   #C8{opacity:0;}
+   .st8{fill:white;stroke:#000000}
+
+   #pod1:hover #C1 {opacity:1;fill:#37CE04;stroke:black;}
+   #pod2:hover #C2 {opacity:1;fill:#AA6CA6;stroke:black;}
+   #pod3:hover #C3 {opacity:1;fill:#FFFF80;stroke:black;}
+   #pod4:hover #C4 {opacity:1;fill:#62D2C5;stroke:black;}
+   #pod5:hover #C5 {opacity:1;fill:#01BEE7;stroke:black;}
+   #pod6:hover #C6 {opacity:1;fill:#FECE2C;stroke:black;}
+   #pod7:hover #C7 {opacity:1;fill:#C7CB8F;stroke:black;}
+   #pod8:hover #C8 {opacity:1;fill:#FC8B8B;stroke:black;}
