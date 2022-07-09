@@ -1,6 +1,0 @@
-test3
-------------
-test3
-------------
-Message(id=148, peer_id=PeerChannel(channel_id=1544694870), date=datetime.datetime(2022, 7, 9, 22, 23, 43, tzinfo=datetime.timezone.utc), message='test3', out=True, mentioned=False, media_unread=False, silent=False, post=True, from_scheduled=False, legacy=False, edit_hide=False, pinned=False, from_id=None, fwd_from=None, via_bot_id=None, reply_to=None, media=None, reply_markup=None, entities=[], views=1, forwards=0, replies=None, edit_date=None, post_author=None, grouped_id=None, restriction_reason=[], ttl_period=None)Message(id=148, peer_id=PeerChannel(channel_id=1544694870), date=datetime.datetime(2022, 7, 9, 22, 23, 43, tzinfo=datetime.timezone.utc), message='test3', out=True, mentioned=False, media_unread=False, silent=False, post=True, from_scheduled=False, legacy=False, edit_hide=False, pinned=False, from_id=None, fwd_from=None, via_bot_id=None, reply_to=None, media=None, reply_markup=None, entities=[], views=1, forwards=0, replies=None, edit_date=None, post_author=None, grouped_id=None, restriction_reason=[], ttl_period=None)
-------------
