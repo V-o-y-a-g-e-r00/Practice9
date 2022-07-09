@@ -143,7 +143,7 @@ if not client.is_user_authorized():
 
 # ###################################
 # Now you can use the connected client as you wish
-INPUT_CHANNEL = 'PrInput'
+INPUT_CHANNEL = 'viewrussia' #PrInput viewrussia
 OUTPUT_CHANNEL = 'PrOutput'
 #TAGS = ['#TAG1', '#TAG2']
 
