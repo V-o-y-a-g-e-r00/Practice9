@@ -28,9 +28,7 @@ with TelegramClient('TregLeg2', api_id, api_hash) as client: #для исклю�
 			print(nic)
 			print('------------------end---------------------\n\n')
 			
-			with open('MsgOutAllPosts.txt', 'ab') as f:
-				f.write(str(nic).encode('utf-8'))
-				f.write('\n------------\n'.encode('utf-8'))
+			
 		if len(result) < limit: #Если постов нашлось меньше, чем мы пытались получить.
 			break
 		cur_id = result[-1].id

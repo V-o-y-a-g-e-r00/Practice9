@@ -37,7 +37,7 @@ async def normal_handler(event):
 	await client.send_message(OUTPUT_CHANNEL, event.message)
 
 	#Получаем только текст из сообщения
-	Path=MessageToBase(event.message)
+	Path=MessageToBase(event.message, 'MsgOutNewPosts.txt')
 	await client.download_media(event.message.media, Path)
 	print("Waiting for new posts on", INPUT_CHANNEL, "channel...")
 

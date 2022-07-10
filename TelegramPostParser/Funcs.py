@@ -120,11 +120,11 @@ def PutInmySQL(List):
 		print(e)
 
 # Принимает сообщение и посылает его в базу, используя PutInmySQL(List)
-def MessageToBase(message):
+def MessageToBase(message, fout):
 	#Пишем сообщения для возможности отладки
-	dMsgOut= open('dMsgOut.txt', 'a')
-	dMsgOut.write(str(message) + "\n")
-	dMsgOut.close()
+	with open(fout, 'ab') as f:
+		f.write(str(message).encode('utf-8'))
+		f.write('\n'.encode('utf-8'))
 	print("New post has been appeared. The message is:\n-----------------\n", message.message, "\n-----------------", sep='')
 	if SplitStr(message.message)[0]!=-1: #Проверяем, имеет ли сообщение тот текст, который нам необходим.
 		print('The message matches the info message criteria')
@@ -146,10 +146,6 @@ def MessageToBase(message):
 		print("Text data has been sent")
 		return "Photos/"+str(List[5])+"/"	
 	else: #Сюда входят случаи, когда сообщение рекламное либо когда оно состоит из прикрепленного изображения.
-		#Пишем сообщения для возможности отладки
-		dMsgOut= open('MsgOutNewPosts.txt', 'a')
-		dMsgOut.write(str(message) + "\n")
-		dMsgOut.close()
 		print('The message does not match the info message criteria')
 		
 		PathStr='NoPath'
