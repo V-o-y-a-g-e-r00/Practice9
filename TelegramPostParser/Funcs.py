@@ -129,6 +129,7 @@ def PutInmySQL(List):
 
 # Принимает сообщение и посылает его в базу, используя PutInmySQL(List)
 def MessageToBase(message, fout):
+	from telethon.sync import TelegramClient, events
 	#Пишем сообщения для возможности отладки
 	with open(fout, 'ab') as f:
 		f.write(str(message).encode('utf-8'))
@@ -140,7 +141,7 @@ def MessageToBase(message, fout):
 		if str(message.grouped_id) != 'None': #Если картинка всего одна, то значение None. нужно как-то подругому идентифицировать картинки к постам.
 			List.append(message.grouped_id) #Пост по факту разбит на несколько, в одном - текст, в остальных - картинки. Поэтому для того, чтобы понять, какие картинки с ним связаны, нам нужно это свойство.
 		else:
-			if str(message.media)=='MessageMediaPhoto':
+			if str(message).find('media=MessageMediaPhoto')!=-1:
 				List.append(message.media.photo.id)
 			else:
 				List.append('NoPhoto') #У поста нет медиаконтента
@@ -160,7 +161,7 @@ def MessageToBase(message, fout):
 		if str(message.grouped_id) != 'None': #Если картинка всего одна, то значение None. нужно как-то подругому идентифицировать картинки к постам.
 			PathStr=str(message.grouped_id)
 		else:
-			if str(message.media)=='MessageMediaPhoto':
+			if str(message).find('media=MessageMediaPhoto')!=-1:
 				PathStr=str(message.media.photo.id)		
 		return "Photos/"+PathStr+"/"
 
