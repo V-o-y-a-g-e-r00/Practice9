@@ -3,3 +3,4 @@ IdmySQL.txt
 *.session-journal
 *.session
 **/__pycache__/
+TelegramPostParser/Photos/
