@@ -7,25 +7,30 @@ def SplitStr(Str):
 
 	List=[]
 	Result=[0, []]
-	#Название и тэг
-	Str1=re.split('\n\n', Str)[0]	
-	#Название
-	List.append(re.split(', ', Str1)[0])
-	#Тэг
-	if len(re.split(', ', Str1))>=2: #Чтобы избежать переполнения.	
-		if re.split(', ', Str1)[1][0]!='#': #Чтобы игнорировать рекламные посты.
-			Result[0]=-1		
-			return Result
-		List.append(re.split(', ', Str1)[1][1:])
-	else:
+	
+	#Проверям, что в сообщении не менее 2 строк
+	if len(re.split('\n\n', Str))<2:
 		Result[0]=-1		
 		return Result
+	#Название и тэг
+	Str1=re.split('\n\n', Str)[0]	
+	if len(re.split('\W*#', Str))<2: #Игнорируем рекламу.	
+		Result[0]=-1		
+		return Result
+	else:
+		#Название
+		List.append(re.split('\W*#', Str)[0])
+		#Тег		
+		List.append(re.split('\W*#', Str1)[1])
 
 	#Описание. Его пока нет, поэтому будет пустая строка
 	List.append('')
 	
 	#Координаты	
-	Str2=re.split('\n\n', Str)[1]
+	Str2=re.split('\n\n', Str)[1] 
+	if len(re.findall('\d+.\d+', Str))<2: #Если с координатами что-то не так
+		Result[0]=-1		
+		return Result
 	List.append(re.findall('\d+.\d+', Str)[0]) #Список из элементов: точка, окруженная цифрами
 	List.append(re.findall('\d+.\d+', Str)[1])
 

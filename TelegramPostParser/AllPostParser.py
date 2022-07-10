@@ -10,7 +10,7 @@ api_hash = dIdHash.readline().splitlines()[0]
 session_name = dIdHash.readline().splitlines()[0]
 dIdHash.close()
 
-INPUT_CHANNEL = 'PrInput' #PrInput viewrussia
+INPUT_CHANNEL = 'viewrussia' #PrInput viewrussia
 
 with TelegramClient('TregLeg2', api_id, api_hash) as client: #для исключений
 	limit = 10
