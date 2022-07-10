@@ -48,6 +48,7 @@ def PutInmySQL(List):
 
 	import re #Для работы со строками
 
+	DBNAME="TouristPlaces1"
 	try: #Все соединения с базой данных оборачивайте в блоки try ... except  .Так будет проще перехватить и изучить любые исключения.
 		fin= open('IdmySQL.txt', 'r')
 		user=fin.readline().splitlines()[0]
@@ -65,26 +66,26 @@ def PutInmySQL(List):
 			
 				#Пошла работа с базами данных
 				#Проверяем, что таблица существует
-				print("Checking existence of TouristPlaces db...")
+				print("Checking existence of", DBNAME, "db...")
 				IsTableExist=0
 				show_db_query = "SHOW DATABASES"
 				with connection.cursor() as cursor:
 					cursor.execute(show_db_query)
 					for db in cursor:
 						temp=re.split('\'', str(db))[1]
-						if temp=='TouristPlaces':
+						if temp==DBNAME:
 							IsTableExist=1
 						#print(db)
 				#print('IsTableExist=', IsTableExist)
 
 				#Если базы данных нет, то создаем её и создаем в ней таблицу.
 				if IsTableExist==0:				
-					print("TouristPlaces db does not exist. Creating TouristPlaces db...")
-					create_db_query = "CREATE DATABASE IF NOT EXISTS TouristPlaces" 
+					print(DBNAME, "db does not exist. Creating", DBNAME, " db...")
+					create_db_query = "CREATE DATABASE IF NOT EXISTS " + DBNAME 
 					with connection.cursor() as cursor:
 						cursor.execute(create_db_query)
 
-					use_db_query = "USE TouristPlaces"
+					use_db_query = "USE "+DBNAME
 					with connection.cursor() as cursor:
 						cursor.execute(use_db_query)
 
@@ -102,10 +103,10 @@ def PutInmySQL(List):
 					with connection.cursor() as cursor:
 						cursor.execute(create_Places_table_query)
 						connection.commit()
-						print("TouristPlaces db has been created")
+						print(DBNAME, "db has been created")
 				else:
-					print("TouristPlaces db exists.")
-					use_db_query = "USE TouristPlaces"
+					print(DBNAME, "db exists.")
+					use_db_query = "USE "+DBNAME
 					with connection.cursor() as cursor:
 						cursor.execute(use_db_query)
 				
@@ -150,7 +151,7 @@ def MessageToBase(message, fout):
 		#photo_1.save(image_buf, format="JPEG")
 		#image = image_buf.getvalue()
 		
-		print("Sending text data to TouristPlaces db...")
+		print("Sending text data to db...")
 		PutInmySQL(List) #Передаем функции, отвечающей за добавление в базу данных список, полученный из строки сообщения.
 		print("Text data has been sent")
 		return "Photos/"+str(List[5])+"/"	
