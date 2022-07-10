@@ -26,8 +26,8 @@ def SplitStr(Str):
 	
 	#Координаты	
 	Str2=re.split('\n\n', Str)[1]
-	List.append(re.split(', ', Str2)[0])
-	List.append(re.split(', ', Str2)[1])
+	List.append(re.findall('\d+.\d+', Str)[0]) #Список из элементов: точка, окруженная цифрами
+	List.append(re.findall('\d+.\d+', Str)[1])
 
 #	print(List)
 	Result[1]=copy.copy(List)
@@ -132,7 +132,7 @@ def MessageToBase(message, fout):
 		if str(message.grouped_id) != 'None': #Если картинка всего одна, то значение None. нужно как-то подругому идентифицировать картинки к постам.
 			List.append(message.grouped_id) #Пост по факту разбит на несколько, в одном - текст, в остальных - картинки. Поэтому для того, чтобы понять, какие картинки с ним связаны, нам нужно это свойство.
 		else:
-			if str(message.media)!='None':
+			if str(message.media)=='photo':
 				List.append(message.media.photo.id)
 			else:
 				List.append('NoPhoto') #У поста нет медиаконтента
@@ -152,7 +152,7 @@ def MessageToBase(message, fout):
 		if str(message.grouped_id) != 'None': #Если картинка всего одна, то значение None. нужно как-то подругому идентифицировать картинки к постам.
 			PathStr=str(message.grouped_id)
 		else:
-			if str(message.media)!='None':
+			if str(message.media)=='photo':
 				PathStr=str(message.media.photo.id)		
 		return "Photos/"+PathStr+"/"
 

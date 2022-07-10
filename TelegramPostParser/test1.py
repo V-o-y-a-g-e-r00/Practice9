@@ -24,10 +24,10 @@ with TelegramClient('TregLeg2', api_id, api_hash) as client: #для исклю�
 		for i in range(len(result)):
 			nic=result[i]
 			
+			MessageToBase(nic, 'MsgOutAllPosts.txt')
 			print('--------------start-------------------------')
 			print(nic)
 			print('------------------end---------------------\n\n')
-			
 			
 		if len(result) < limit: #Если постов нашлось меньше, чем мы пытались получить.
 			break
