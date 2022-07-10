@@ -9,17 +9,20 @@ def SplitStr(Str):
 	Result=[0, []]
 	
 	#Проверям, что в сообщении не менее 2 строк
-	if len(re.split('\n\n', Str))<2:
+	if not isinstance(Str, str): #Бывает, что попадает нестрока, как ни странно.
+		Result[0]=-1		
+		return Result
+	if len(re.split('\n\n', str(Str)))<2:
 		Result[0]=-1		
 		return Result
 	#Название и тэг
 	Str1=re.split('\n\n', Str)[0]	
-	if len(re.split('\W*#', Str))<2: #Игнорируем рекламу.	
+	if len(re.split('\W*#', Str1))<2: #Игнорируем рекламу.	
 		Result[0]=-1		
 		return Result
 	else:
 		#Название
-		List.append(re.split('\W*#', Str)[0])
+		List.append(re.split('\W*#', Str1)[0])
 		#Тег		
 		List.append(re.split('\W*#', Str1)[1])
 
@@ -137,7 +140,7 @@ def MessageToBase(message, fout):
 		if str(message.grouped_id) != 'None': #Если картинка всего одна, то значение None. нужно как-то подругому идентифицировать картинки к постам.
 			List.append(message.grouped_id) #Пост по факту разбит на несколько, в одном - текст, в остальных - картинки. Поэтому для того, чтобы понять, какие картинки с ним связаны, нам нужно это свойство.
 		else:
-			if str(message.media)=='photo':
+			if str(message.media)=='MessageMediaPhoto':
 				List.append(message.media.photo.id)
 			else:
 				List.append('NoPhoto') #У поста нет медиаконтента
@@ -157,7 +160,7 @@ def MessageToBase(message, fout):
 		if str(message.grouped_id) != 'None': #Если картинка всего одна, то значение None. нужно как-то подругому идентифицировать картинки к постам.
 			PathStr=str(message.grouped_id)
 		else:
-			if str(message.media)=='photo':
+			if str(message.media)=='MessageMediaPhoto':
 				PathStr=str(message.media.photo.id)		
 		return "Photos/"+PathStr+"/"
 

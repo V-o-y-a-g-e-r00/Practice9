@@ -13,7 +13,7 @@ dIdHash.close()
 INPUT_CHANNEL = 'viewrussia' #PrInput viewrussia
 
 with TelegramClient('TregLeg2', api_id, api_hash) as client: #для исключений
-	limit = 10
+	limit = 100
 	cur_id = 0
 	while True:
 		result = client(functions.messages.GetHistoryRequest(
