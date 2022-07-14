@@ -49,6 +49,13 @@
         "type_traits": "cpp",
         "tuple": "cpp",
         "typeinfo": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "atomic": "cpp",
+        "condition_variable": "cpp",
+        "cstring": "cpp",
+        "mutex": "cpp",
+        "numeric": "cpp",
+        "stop_token": "cpp",
+        "thread": "cpp"
     }
 }
