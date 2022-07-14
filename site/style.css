@@ -1,32 +1,104 @@
-   #C1{opacity:0;}
-   .st1{fill:white;stroke:#000000}
-   
-   #C2{opacity:0;}
-   .st2{fill:white;stroke:#000000}
 
-   #C3{opacity:0;}
-   .st3{fill:white;stroke:#000000}
+.headre {
+    justify-content: flex-start;
+}
 
-   #C4{opacity:0;}
-   .st4{fill:white;stroke:#000000}
+.wrapper {
+    margin: 0 auto;
+    justify-content: flex-start;
+    
+}
 
-   #C5{opacity:0;}
-   .st5{fill:white;stroke:#000000}
+#oknoo { 
+  margin-left: auto;
+  margin-right: auto;
 
-   #C6{opacity:0;}
-   .st6{fill:white;stroke:#000000}
+  transform: scale(0.7);
+  position: absolute;
+  backdrop-filter: blur(5px);
+}
 
-   #C7{opacity:0;}
-   .st7{fill:white;stroke:#000000}
 
-   #C8{opacity:0;}
-   .st8{fill:white;stroke:#000000}
+.displlay {border:#000000 solid 3px;
+    border-radius: 12px; 
+    padding: 2%;
+    display:flex;
+    justify-content: center;
+    
+} 
 
-   #pod1:hover #C1 {opacity:1;fill:#37CE04;stroke:black;}
-   #pod2:hover #C2 {opacity:1;fill:#AA6CA6;stroke:black;}
-   #pod3:hover #C3 {opacity:1;fill:#FFFF80;stroke:black;}
-   #pod4:hover #C4 {opacity:1;fill:#62D2C5;stroke:black;}
-   #pod5:hover #C5 {opacity:1;fill:#01BEE7;stroke:black;}
-   #pod6:hover #C6 {opacity:1;fill:#FECE2C;stroke:black;}
-   #pod7:hover #C7 {opacity:1;fill:#C7CB8F;stroke:black;}
-   #pod8:hover #C8 {opacity:1;fill:#FC8B8B;stroke:black;}
+svg { border:#000000 solid 3px;
+      border-radius: 12px; 
+      display: block;
+  margin-left: auto;
+  margin-right: auto;
+    }
+
+
+    
+
+#svg1 {fill:#000000;display:inline;stroke-linejoin:round;stroke:#000000}
+#svg2 {display:inline;stroke-linejoin:round;stroke:#000000;fill:white}
+
+#ARK,#MUR,#PSK,#SMO,
+#NEN,#KAM,#Sakhalin_island,
+#path8669,#path26237,#path23925-7,
+#KR,#LEN,#AD,#KK,#KEM,#TOM,#KYA,#SA,#KHM,
+#SVE,#TYU,#IRK,#Zabaykalsky,#BU,#PER,#KO,#UD,
+#TA,#ME,#BA,#KIR,#CU,#NIZ,#VLA,#IVA,#KOS,
+#YAR,#VLG,#BA,#KGN,#SAM,#ULY,#SAR,#PNZ,#MO,
+#TAM,#RYA,#TUL,#LIP,#ORL,#AST,#ROS,#VGG,#KB,#CE,
+#STA,#KDA,#KHA,#YAN,#MOW,#MOS,#TVE,#NGR,#KLU,#KGD,
+#CHU,#MAG,#PRI,#YEV,#AMU,#TY,#AL,#ALT,#NVS,#OMS,#CHE,
+#ORE,#KL,#DA,#IN,#SE,#KC,#VOR,#BEL,#KRS,#BRY,#SMO,#PSK
+{
+    
+    transition:all 0.35s ease;
+}
+#ARK:hover,#MUR:hover,#PSK:hover,#SMO:hover,#NEN:hover,#KAM:hover,
+#Sakhalin_island:hover,#path8669:hover,#path26237:hover,
+#path23925-7:hover,#KR:hover,#LEN:hover,#AD:hover,
+#KK:hover,#KEM:hover,#TOM:hover,#KYA:hover,
+#SA:hover,#KHM:hover,#SVE:hover,#TYU:hover,
+#IRK:hover,#Zabaykalsky:hover,#BU:hover,#PER:hover,
+#KO:hover,#UD:hover,#TA:hover,#ME:hover,#BA:hover,
+#KIR:hover,#CU:hover,#NIZ:hover,#VLA:hover,#IVA:hover,
+#KOS:hover,#YAR:hover,#VLG:hover,#BA:hover,#KGN:hover,
+#SAM:hover,#ULY:hover,#SAR:hover,#PNZ:hover,#MO:hover,
+#TAM:hover,#RYA:hover,#TUL:hover,#LIP:hover,#ORL:hover,
+#AST:hover,#ROS:hover,#VGG:hover,#KB:hover,#CE:hover,
+#STA:hover,#KDA:hover,#KHA:hover,#YAN:hover,#MOW:hover,
+#MOS:hover,#TVE:hover,#NGR:hover,#KLU:hover,#KGD:hover,
+#CHU:hover,#MAG:hover,#PRI:hover,#YEV:hover,#AMU:hover,
+#TY:hover,#AL:hover,#ALT:hover,#NVS:hover,#OMS:hover,
+#CHE:hover,#ORE:hover,#KL:hover,#DA:hover,#IN:hover,
+#SE:hover,#KC:hover,#VOR:hover,#BEL:hover,#KRS:hover,
+#BRY:hover
+{
+    transform: translateY(-1%);
+}
+
+#ARK:hover{fill:#2EB0E6;}#MUR:hover{fill:#273C90;}#PSK:hover{fill:#3257A3;}#SMO:hover{fill:#E63B17;}#NEN:hover{fill:#2E4B9B;}
+#KAM:hover{fill:#2E65AF;}#Sakhalin_island:hover{fill:#018DC9;}#path8669:hover{fill:#E42013}#path26237:hover{fill:#2B99D5;}
+#path23925-7:hover{fill:#E72D45;}#KR:hover{fill:#4DAF49;}#LEN:hover{fill:#50B8E9}#AD:hover{fill:#08A039;}#KK:hover{fill:#4EAE33;}
+#KEM:hover{fill:#408ACA;}#TOM:hover{fill:#69B42D;}#KYA:hover{fill:#E52B1D;}#SA:hover{fill:#55A5DC;}#KHM:hover{fill:#367DC0;}
+#SVE:hover{fill:#69B42F;}#TYU:hover{fill:#D72116;}#IRK:hover{fill:#4DBDEE;}#Zabaykalsky:hover{fill:#D6D900;}#BU:hover{fill:#375DA8;}
+#PER:hover{fill:#E51E3E;}#KO:hover{fill:#2AA837;}#UD:hover{fill:#1B1009;}#TA:hover{fill:#22A847;}#ME:hover{fill:#E41713;}#BA:hover{fill:#1D66B0}
+#KIR:hover{fill:#E8E124;}#CU:hover{fill:#DFDE1C;}#NIZ:hover{fill:#AFA5D2;}#VLA:hover{fill:#4FB5E8;}#IVA:hover{fill:#CC1A17;}
+#KOS:hover{fill:#314A9A;}#YAR:hover{fill:#54AF32;}#VLG:hover{fill:#1D66B0;}#BA:hover{fill:#43AB34;}#KGN:hover{fill:#E42315;}
+#SAM:hover{fill:#449CD7;}#ULY:hover{fill:#50B8E9;}#SAR:hover{fill:#E42513;}#PNZ:hover{fill:#E31713;}#MO:hover{fill:#E22F13;}
+#TAM:hover{fill:#63B32F;}#RYA:hover{fill:#FFDF14;}#TUL:hover{fill:#E52526;}#LIP:hover{fill:#E62A38;}#ORL:hover{fill:#1F94D3;}
+#AST:hover{fill:#419BD6;}#ROS:hover{fill:#E52A21;}#VGG:hover{fill:#2D4798;}#KB:hover{fill:#44A6DE;}#CE:hover{fill:#E41D20;}
+#STA:hover{fill:#F5E71E;}#KDA:hover{fill:#C01481;}#KHA:hover{fill:#37A936}#YAN:hover{fill:#3068B1;}#MOW:hover{fill:#841810;}
+#MOS:hover{fill:#E5232C;}#TVE:hover{fill:#F3E61B;}#NGR:hover{fill:#BA2718;}#KLU:hover{fill:#50B056;}#KGD:hover{fill:#D61116;}
+#CHU:hover{fill:#2A4294;}#MAG:hover{fill:#E30613;}#PRI:hover{fill:#E52331;}#YEV:hover{fill:#E8328A;}#AMU:hover{fill:#DF091A;}
+#TY:hover{fill:#ECE300;}#AL:hover{fill:#31BCEF;}#ALT:hover{fill:#E30613;}#NVS:hover{fill:#199738;}#OMS:hover{fill:#2F56A3;}
+#CHE:hover{fill:#E5172A;}#ORE:hover{fill:#E30140;}#KL:hover{fill:#F5E71C;}#DA:hover{fill:#37A936;}#IN:hover{fill:#66B32E;}
+#SE:hover{fill:#E52E18;}#KC:hover{fill:#E62C2F;}#VOR:hover{fill:#F6E827;}#BEL:hover{fill:#2B4999;}#KRS:hover{fill:#F1E500;}
+#BRY:hover{fill:#E5252B;}
+
+#oknoo {
+    
+    transition:all 0.35s ease;
+}
+
