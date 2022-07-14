@@ -32,13 +32,14 @@ int main(int argc, const char* argv[]){
                     web::json::value jsonArr;
                     std::string StrTag=web::uri::decode(http_get_vars.at("tag")); //Строка с тегом, который мы получили в запросе в раскодированном виде
 
-                    std::vector<std::pair<double, double>> Coord;
+                    std::vector<PointEntity> Coord;
                     GetCoordByTag(StrTag, Coord, DBName);
                     for(int i=0; i<Coord.size(); i++)
                     {
                         web::json::value jsonObj;
-                        jsonObj["latitude"]= web::json::value::number(Coord.at(i).first);
-                        jsonObj["longitude"]= web::json::value::number(Coord.at(i).second);
+                        jsonObj["id"]= web::json::value::number(Coord.at(i).id);
+                        jsonObj["latitude"]= web::json::value::number(Coord.at(i).x);
+                        jsonObj["longitude"]= web::json::value::number(Coord.at(i).y);
                         jsonArr[i]=jsonObj;
 
                     }

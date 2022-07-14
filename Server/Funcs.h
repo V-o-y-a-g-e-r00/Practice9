@@ -11,7 +11,13 @@
 #include <mysql-cppconn-8/mysqlx/xdevapi.h> //cpp Коннектор для mySQL
 
 //Возрващает вектор пар координат всех точек в регионе
-int GetCoordByTag(const std::string &StrTag, std::vector<std::pair<double, double>> &Coord, const std::string &DBName)
+struct PointEntity
+{
+    int id;
+    double x;
+    double y;
+};
+int GetCoordByTag(const std::string &StrTag, std::vector<PointEntity> &Coord, const std::string &DBName)
 {
     using ::std::cout;
     using ::std::endl;
@@ -43,7 +49,10 @@ int GetCoordByTag(const std::string &StrTag, std::vector<std::pair<double, doubl
            // cout<<(double)row.get(4)<<endl;
             
             //cout<<"id:"<<row.get(0)<<"; name:"<<row.get(1)<<endl;;
-            Coord.push_back(std::make_pair((double)row.get(4), (double)row.get(5)));
+            PointEntity PointEntity1={(int)row.get(0), (double)row.get(4), (double)row.get(5)};
+
+
+            Coord.push_back(PointEntity1);
         }
         
         //std::string str=(std::string)rres.fetchOne().get(1);
