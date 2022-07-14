@@ -4,6 +4,8 @@
 #include <cpprest/base_uri.h>
 #include <cpprest/json.h> 
 
+//#include "Funcs.h"
+
 using namespace web::http;                  // Common HTTP functionality
 using namespace web::http::client;          // HTTP client features
 using namespace concurrency::streams;       // Asynchronous streams
@@ -11,18 +13,50 @@ using namespace web::http::experimental::listener;
 //#include <cpprest/http_client.h>
 
 int main(int argc, const char* argv[]){
+    std::string DBName("TouristPlaces1");
     http_listener listener("http://localhost:12345");
-    
-    int count = 0;
 
-    listener.support([count] (http_request request) mutable
+    listener.support([DBName] (http_request request) mutable
     {
-        //std::cout << "GET "<< request.request_uri().to_string() << std::endl;
+        web::http::http_response response(200); //Формируемый ответ на запрос
 
+        auto http_get_vars = uri::split_query(request.request_uri().query()); //map пары ключ значение
+        switch (http_get_vars.size())
+        {
+            case 0: //Отправляем пользователю страницу
+                
+                break;
+            case 1: //Отправляем пары координат всех точек в выбранном регионе
+                {
+                    web::json::value jsonArr;
+                    std::string StrTag=web::uri::decode(http_get_vars.at("tag")); //Строка с тегом, который мы получили в запросе в раскодированном виде
 
-        // 
-        auto http_get_vars = uri::split_query(request.request_uri().query());
-        http_get_vars.at("param1");
+                    std::vector<std::pair<double, double>> Coord;
+                    //GetCoordByTag(StrTag, Coord, DBName);
+                    for(int i=0; i<Coord.size(); i++)
+                    {
+                        web::json::value jsonObj;
+                        jsonObj["latitude"]= web::json::value::number(Coord.at(i).first);
+                        jsonObj["longitude"]= web::json::value::number(Coord.at(i).second);
+                        jsonArr[i]=jsonObj;
+
+                    }
+                    response.set_body(jsonArr);
+                    response.headers().set_content_type(utility::conversions::to_string_t("application/json"));
+                    break;
+                }
+            case 2: //Отправляем всю инормацию о выбранной точке
+                {
+                    web::json::value jsonObj;
+
+                    response.set_body(jsonObj);
+                    response.headers().set_content_type(utility::conversions::to_string_t("application/json"));
+                    break;
+                }
+            default:
+                break;
+        }
+        request.reply(response);
 
         std::cout<< "http_get_vars.at(\"param1\")="<<http_get_vars.at("param1")<<std::endl;
         std::string str=web::uri::decode(http_get_vars.at("param1"));
@@ -30,42 +64,16 @@ int main(int argc, const char* argv[]){
 
         std::cout<< "http_get_vars.size()="<<http_get_vars.size()<<std::endl;
 
-/*  
-
-        // так анализируются параметры
-        auto param_end = http_get_vars.find("end");
-        if (param_end != end(http_get_vars)) {
-            auto request_name = param_end->second;
-            std::cout << "Received \"end\": " << request_name << std::endl;
-        }
-
-        auto param_start = http_get_vars.find(utility::conversions::to_string_t("start"));
-        if (param_start != end(http_get_vars)) {
-            auto request_name = param_start->second;
-            std::cout << "Received \"start\": " << request_name << std::endl;
-        }
-*/      web::json::value jsonObj;
+    /*
+        web::json::value jsonObj;
         jsonObj["id"]=web::json::value::number(101);
         jsonObj["latitude"]= web::json::value::number(10.203040);
         jsonObj["longitude"]= web::json::value::number(99.223344);
 
-        web::json::value jsonarr;
-        jsonarr[0]=jsonObj;
-        jsonarr[1]=jsonObj;
 
         std::cout<<"jsonObj.serialize.c_str()=" <<jsonObj.serialize().c_str()<<std::endl;
         std::cout<<"jsonarr.serialize.c_str()=" <<jsonarr.serialize().c_str()<<std::endl;
-
-
-        web::http::http_response response(200);
-        response.headers().set_content_type(utility::conversions::to_string_t("application/json"));
-        response.set_body(jsonarr);
-        request.reply(response);
-
-
-
-
-        //request.reply(status_codes::OK, jsonObj.serialize() ,utility::conversions::to_string_t("application/json"));
+    */
     }
     );
 
