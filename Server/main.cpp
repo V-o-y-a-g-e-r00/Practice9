@@ -27,6 +27,9 @@ int main(int argc, const char* argv[]){
         std::cout<< "http_get_vars.at(\"param1\")="<<http_get_vars.at("param1")<<std::endl;
         std::string str=web::uri::decode(http_get_vars.at("param1"));
         std::cout<< "str="<<str<<std::endl;
+
+        std::cout<< "http_get_vars.size()="<<http_get_vars.size()<<std::endl;
+
 /*  
 
         // так анализируются параметры
@@ -42,6 +45,7 @@ int main(int argc, const char* argv[]){
             std::cout << "Received \"start\": " << request_name << std::endl;
         }
 */      web::json::value jsonObj;
+        jsonObj["id"]=web::json::value::number(101);
         jsonObj["latitude"]= web::json::value::number(10.203040);
         jsonObj["longitude"]= web::json::value::number(99.223344);
 
@@ -65,12 +69,12 @@ int main(int argc, const char* argv[]){
     }
     );
 
-    listener.open().wait();
+    listener.open();
 	std::cout << "Web server started on: " << listener.uri().to_string() << std::endl;
 
     getchar();
 
 	std::cout << "Terminating JSON listener." << std::endl;
-	listener.close().wait();
+	listener.close();
     return 0;
 }   
