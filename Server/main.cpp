@@ -4,13 +4,12 @@
 #include <cpprest/base_uri.h>
 #include <cpprest/json.h> 
 
-//#include "Funcs.h"
+#include "Funcs.h"
 
 using namespace web::http;                  // Common HTTP functionality
 using namespace web::http::client;          // HTTP client features
 using namespace concurrency::streams;       // Asynchronous streams
 using namespace web::http::experimental::listener;
-//#include <cpprest/http_client.h>
 
 int main(int argc, const char* argv[]){
     std::string DBName("TouristPlaces1");
@@ -32,7 +31,7 @@ int main(int argc, const char* argv[]){
                     std::string StrTag=web::uri::decode(http_get_vars.at("tag")); //Строка с тегом, который мы получили в запросе в раскодированном виде
 
                     std::vector<std::pair<double, double>> Coord;
-                    //GetCoordByTag(StrTag, Coord, DBName);
+                    GetCoordByTag(StrTag, Coord, DBName);
                     for(int i=0; i<Coord.size(); i++)
                     {
                         web::json::value jsonObj;

@@ -142,6 +142,6 @@ int GetEntity(const std::string &DBid, entity &Entity, const std::string &DBName
 }
 
 // cpprest ////////////////////////////////
-void 
+//void 
 
 #endif /* FUNCS_H */
