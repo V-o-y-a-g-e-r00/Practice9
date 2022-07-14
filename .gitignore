@@ -4,3 +4,4 @@ IdmySQL.txt
 *.session
 **/__pycache__/
 TelegramPostParser/Photos/
+Server/build/
