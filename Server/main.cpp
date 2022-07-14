@@ -41,7 +41,6 @@ int main(int argc, const char* argv[]){
                         jsonObj["latitude"]= web::json::value::number(Coord.at(i).x);
                         jsonObj["longitude"]= web::json::value::number(Coord.at(i).y);
                         jsonArr[i]=jsonObj;
-
                     }
                     response.set_body(jsonArr);
                     response.headers().set_content_type(utility::conversions::to_string_t("application/json"));
@@ -51,6 +50,20 @@ int main(int argc, const char* argv[]){
             case 2: //Отправляем всю инормацию о выбранной точке
                 {
                     web::json::value jsonObj;
+
+                    std::string DBid=web::uri::decode(http_get_vars.at("id")); //Строка с id
+
+                    entity Entity;
+                    GetEntity(DBid, Entity, DBName);
+
+                    jsonObj["id"]=web::json::value::number(Entity.id);
+                    jsonObj["name"]=web::json::value::string(utility::conversions::to_string_t(Entity.name));
+                    jsonObj["tag"]=web::json::value::string(utility::conversions::to_string_t(Entity.tag));
+                    jsonObj["description"]=web::json::value::string(utility::conversions::to_string_t(Entity.description));
+                    jsonObj["latitude"]= web::json::value::number(Entity.latitude);
+                    jsonObj["longitude"]= web::json::value::number(Entity.longitude);
+                    jsonObj["grouped_id"]= web::json::value::string(utility::conversions::to_string_t(Entity.grouped_id));
+
 
                     response.set_body(jsonObj);
                     response.headers().set_content_type(utility::conversions::to_string_t("application/json"));
