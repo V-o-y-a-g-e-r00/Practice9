@@ -27,6 +27,8 @@ int main(int argc, const char* argv[]){
                 break;
             case 1: //Отправляем пары координат всех точек в выбранном регионе
                 {
+                    std::cout<<"The number of param is" <<http_get_vars.size()<<" Sending pairs of coordinates of all places in region..."<<std::endl;
+
                     web::json::value jsonArr;
                     std::string StrTag=web::uri::decode(http_get_vars.at("tag")); //Строка с тегом, который мы получили в запросе в раскодированном виде
 
@@ -42,6 +44,7 @@ int main(int argc, const char* argv[]){
                     }
                     response.set_body(jsonArr);
                     response.headers().set_content_type(utility::conversions::to_string_t("application/json"));
+                    std::cout<<"The data sent"<<std::endl;
                     break;
                 }
             case 2: //Отправляем всю инормацию о выбранной точке
