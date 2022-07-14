@@ -6,7 +6,7 @@ find_package(cpprestsdk REQUIRED)
 add_executable(Server main.cpp)
 #target_link_libraries(Server mysqlcppconn8 cpprestsdk::cpprest)
 
-target_link_libraries(Server pthread cpprestsdk::cpprest -lcrypto)
+target_link_libraries(Server pthread cpprestsdk::cpprest -lcrypto mysqlcppconn8)
 
 #target_compile_features(Server PRIVATE cxx_range_for)  
 

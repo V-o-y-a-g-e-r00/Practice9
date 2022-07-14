@@ -1,3 +1,5 @@
+#include <mysql-cppconn-8/mysqlx/xdevapi.h> //cpp Коннектор для mySQL
+#define _TURN_OFF_PLATFORM_STRING
 #include <cpprest/http_listener.h> 
 
 using namespace web::http;                  // Common HTTP functionality
@@ -11,13 +13,39 @@ int main(int argc, const char* argv[]){
     
     int count = 0;
 
-    listener.support(methods::GET, [count] (http_request request) mutable {
-	std::cout << "GET "<< request.request_uri().to_string() << std::endl;
+    listener.support(methods::GET, [count] (http_request request) mutable
+    {
+        std::cout << "GET "<< request.request_uri().to_string() << std::endl;
 
 
+        // здесь я получаю параметры получения
+        auto http_get_vars = uri::split_query(request.request_uri().query());
 
+        std::cout<< "http_get_vars="<<http_get_vars.at(0)<<std::endl;
 
+        // так анализируются параметры
+        auto param_end = http_get_vars.find("end");
+        if (param_end != end(http_get_vars)) {
+            auto request_name = param_end->second;
+            std::cout << "Received \"end\": " << request_name << std::endl;
+        }
 
-    });
+        auto param_start = http_get_vars.find(utility::conversions::to_string_t("start"));
+        if (param_start != end(http_get_vars)) {
+            auto request_name = param_start->second;
+            std::cout << "Received \"start\": " << request_name << std::endl;
+        }
+
+        request.reply(status_codes::OK, utility::conversions::to_string_t("bodydata1"),utility::conversions::to_string_t("text/html"));
+    }
+    );
+
+    listener.open().wait();
+	std::cout << "Web server started on: " << listener.uri().to_string() << std::endl;
+
+    getchar();
+
+	std::cout << "Terminating JSON listener." << std::endl;
+	listener.close().wait();
     return 0;
 }   
