@@ -12,7 +12,7 @@ using namespace concurrency::streams;       // Asynchronous streams
 using namespace web::http::experimental::listener;
 
 int main(int argc, const char* argv[]){
-    std::string DBName("TouristPlaces1");
+    std::string DBName("TouristPlaces");
     http_listener listener("http://localhost:12345");
 
     listener.support([DBName] (http_request request) mutable
