@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 //#include <cpprest/http_client.h>
 
 #include <mysql-cppconn-8/mysqlx/xdevapi.h>
@@ -11,7 +12,7 @@ int main(int argc, const char* argv[]){
     std::cout << "Hello, world!\n";
     try
     {
-        const char   *url = (argc > 1 ? argv[1] : "mysqlx://root@127.0.0.1");
+        const char   *url = (argc > 1 ? argv[1] : "mysqlx://root:qwertyz@127.0.0.1");
 
         cout << "Creating session on " << url
             << " ..." << endl;
@@ -20,8 +21,12 @@ int main(int argc, const char* argv[]){
 
         cout <<"Session accepted, creating collection..." <<endl;
 
-        Schema sch= sess.getSchema("test");
-        Collection coll= sch.createCollection("c1", true);
+        Schema sch= sess.getSchema("TouristPlaces1");
+        Table tlPlaces = sch.getTable("Places", true);
+        RowResult rres = tlPlaces.select("*").execute();
+        std::string str=(std::string)rres.fetchOne().get(1);
+        cout<<"str="<<str<<endl;
+
 
         cout <<"Done!" <<endl;
     }
