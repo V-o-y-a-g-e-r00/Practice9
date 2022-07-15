@@ -3,5 +3,6 @@ IdmySQL.txt
 *.session-journal
 *.session
 **/__pycache__/
+**/.vscode/
 TelegramPostParser/Photos/
 Server/build/
