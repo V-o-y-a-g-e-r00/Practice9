@@ -8,7 +8,7 @@
   - Киреев В.Т.
   - Морозов Н.Н.
 - Backend:
-  - Telegarm post parser:
+  - Telegram post parser:
     - Молошников Ф.А. [ V-o-y-a-g-e-r00](https://github.com/V-o-y-a-g-e-r00)
   - Web server:
     - Борисов А.Э [ ArtemBorisow](https://github.com/ArtemBorisow) и Молошников Ф.А. [ V-o-y-a-g-e-r00](https://github.com/V-o-y-a-g-e-r00)
